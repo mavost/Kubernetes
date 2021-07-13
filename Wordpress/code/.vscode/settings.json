@@ -1,0 +1,6 @@
+{
+    "redhat.telemetry.enabled": false,
+    "yaml.schemas": {
+        "kubernetes": ["/wordpress-deployment.yaml", "/mysql-deployment.yaml", "/persistentvolume.yaml"]
+    }
+}

@@ -7,4 +7,5 @@ fresh: clean
 clean:
 	vagrant destroy -f
 	rm -rf .vagrant
+	rm roles/iad*
 	
