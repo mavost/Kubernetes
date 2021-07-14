@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot-deployment
+spec:
+  selector:
+    matchLabels:
+      app: chatbot
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: chatbot
+    spec:
+      containers:
+        - name: my-chatbot
+          image: itbrainzerfurt/chatbot-ai:latest
+#          image: mavost/urban_docker:latest
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbot-service-np
+  labels:
+    name: chatbot-service-np
+spec:
+  type: NodePort
+  ports:
+    - port: 8082        # Cluster IP http://10.109.199.234:8082
+      targetPort: 5000  # Application port chatbot
+#      targetPort: 3000  # Application port Urban Docker
+      nodePort: 30080   # (EXTERNAL-IP VirtualBox IPs) http://192.168.50.11:30080/ http://192.168.50.12:30080/ http://192.168.50.13:30080/
+      protocol: TCP
+      name: http
+  selector:
+    app: chatbot
+
+  
