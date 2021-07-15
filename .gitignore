@@ -1,3 +1,5 @@
 .vagrant/
 .private/
 *-join-command
+# ceph-related
+cephDisk*
