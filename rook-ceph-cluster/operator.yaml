@@ -362,7 +362,7 @@ spec:
       serviceAccountName: rook-ceph-system
       containers:
         - name: rook-ceph-operator
-          image: rook/ceph:v1.6.7
+          image: rook/ceph:master
           args: ["ceph", "operator"]
           volumeMounts:
             - mountPath: /var/lib/rook
@@ -374,9 +374,6 @@ spec:
             # If this is not set to true, the operator will watch for cluster CRDs in all namespaces.
             - name: ROOK_CURRENT_NAMESPACE_ONLY
               value: "false"
-            # To disable RBAC, uncomment the following:
-            # - name: RBAC_ENABLED
-            #   value: "false"
             # Rook Agent toleration. Will tolerate all taints with all keys.
             # Choose between NoSchedule, PreferNoSchedule and NoExecute:
             # - name: AGENT_TOLERATION
@@ -503,6 +500,14 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          # Recommended resource requests and limits, if desired
+          #resources:
+          #  limits:
+          #    cpu: 500m
+          #    memory: 256Mi
+          #  requests:
+          #    cpu: 100m
+          #    memory: 128Mi
 
           #  Uncomment it to run lib bucket provisioner in multithreaded mode
           #- name: LIB_BUCKET_PROVISIONER_THREADS
